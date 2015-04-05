@@ -1,0 +1,98 @@
+GraphMan version 1.0
+=======================
+
+NAME:
+
+Graph Manipulation Tool
+
+
+DESCRIPTION:
+
+Given a graph G(E,V), program allows to relocate, add, delete and remove edges(E) and vertices(V) in G. 
+
+
+
+SYNOPSIS:
+
+    #include<vector>
+    #include<GraphMan.hpp>
+
+    vector<int|long|unsigned|double> parent {1,1,2,1,2,3,4,6,3,2,67,67};
+    vector<int|long|unsigned|double> child  {2,4,8,5,67,6,14,15,68,3,11,17};
+
+/* Make Graph */
+
+    /* Construction */
+    Graph<int|long|unsigned|double> graph(parent,child);
+    /*  OR  */
+    Graph<int|long|unsigned|double> graph;
+    graph.make(parent,child);
+
+
+/*  Functions */
+
+    graph.AddVertex(CreateVertex(),8)  // creates a new vertex and adds it to vertex 8
+                                       //    result: 8 -- 69 edge
+    
+    graph.EraseVertex(4);  // it erases vertex 4 and makes an edge between 14 and 1
+
+    graph.RemoveVertex(67);// vertex 67 and all its child nodes are relocated to graph 
+                           // rotted at 0
+                                       //    result: 0 -- 67 +- 11
+                                                             +- 17
+                                                             
+    graph.RelocateVertex(5,6)          // assigns vertex 5 to vertex 6
+                                             //    result:   1 +- 4 -- 14
+                                                               +- 2 +- 8
+                                                                    +- 3 +- 68
+                                                                         +- 6 +- 15
+                                                                              +- 5 
+    vector<int|long|unsigned|double> p-dash;
+    vector<int|long|unsigned|double> c-dash;
+    
+    graph.DmpGraph(p-dash,c-dash);      // creates two vectors 
+                  //results: p-dash:  0	67	67	1	 1	2	2	3	 3	 4	 6	6	 8	 8	
+                  //         c-dash: 67	11	17	2	14	8	3	6	68	14	15	5	69	70	
+                  
+    graph.GetDepthVec()      // returns the depth vector
+                             //    result for 2: 1	2	 3	 3	2	3	 4	1	 3	 1
+                             
+    graph.GetVertexIdVec()   // returns the set of vertices (vector)
+                             //    result for 2: 2	8	69	70	3	6	15	5	68	14
+
+
+
+CONSTRUCTION AND RUNTIME COMPLEXITY:
+
+
+     -
+
+
+ACKNOWLEDGMENTS:
+     
+     -
+
+
+AUTHOR:
+
+Robert Bakaric <rbakaric@irb.hr>, <bakaric@evolbio.mpg.de>
+
+COPYRIGHT AND LICENSE:
+
+ * Copyright 2015 Robert Bakaric
+ * 
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+
